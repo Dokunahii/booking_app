@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Button, Form } from 'react-bootstrap'
 
-const API_URL = "https://e872ba8e-0f1e-42cb-a9c7-b5bdb9c143e9-00-3eq6cim1t8thu.sisko.replit.dev"
+const API_URL = import.meta.env.VITE_API_URL
 
 function App() {
   const [title, setTitle] = useState("")
