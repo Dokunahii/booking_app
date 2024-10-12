@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Button, Form } from 'react-bootstrap'
 
-const API_URL = import.meta.env.VITE_API_URL
-
 function App() {
+  const [API_URL, setAPI_URL] = useState("")
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [date, setDate] = useState("")
@@ -117,6 +116,17 @@ function App() {
   return (
     <>
       <Form onChange={checkFormValidity}>
+
+        <Form.Group>
+          <Form.Label>API_URL</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder='API_URL'
+            value={API_URL}
+            onChange={(e) => setAPI_URL(e.target.value)}
+            required
+          />
+        </Form.Group>
 
         <Form.Group>
           <Form.Label>title</Form.Label>
