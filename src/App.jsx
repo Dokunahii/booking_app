@@ -16,6 +16,8 @@ function App() {
 
   const [posts, setPosts] = useState([])
 
+  const [updatingId, setupdatingId] = useState("")
+
   const checkFormValidity = () => {
     const form = document.querySelector('form')
     setIsFormValid(form.checkValidity())
@@ -71,6 +73,7 @@ function App() {
     .then(res => res.json())
     .then(data => {
       const {title, description, date, time, phone_number, email, user_id} = data
+      setupdatingId(id)
       setTitle(title)
       setDescription(description)
       setDate(date)
@@ -84,7 +87,7 @@ function App() {
 
   const editPost = () => {
     
-    const id = user_id
+    const id = updatingId
 
     fetch(API_URL + "/update/" + id, {
       method: "PUT",
@@ -95,6 +98,7 @@ function App() {
       .then(fetchPosts)
       .catch(err => console.error(err))
 
+      setupdatingId("")
       setTitle('')
       setDescription("")
       setDate("")
@@ -115,18 +119,19 @@ function App() {
 
   return (
     <>
+      <Form.Group>
+        <Form.Label>API_URL</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder='API_URL'
+          value={API_URL}
+          onChange={(e) => setAPI_URL(e.target.value)}
+           required
+         />
+      </Form.Group>
+
       <Form onChange={checkFormValidity}>
 
-        <Form.Group>
-          <Form.Label>API_URL</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder='API_URL'
-            value={API_URL}
-            onChange={(e) => setAPI_URL(e.target.value)}
-            required
-          />
-        </Form.Group>
 
         <Form.Group>
           <Form.Label>title</Form.Label>
